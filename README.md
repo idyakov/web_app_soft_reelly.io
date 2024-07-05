@@ -1,5 +1,6 @@
 
 Feature: Test Scenarios for Search functionality of soft.reelly page
+
   Scenario: User sign on main page functionality
     Given Open soft.reelly page
     When Input name field
