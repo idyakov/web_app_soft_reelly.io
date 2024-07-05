@@ -1,15 +1,12 @@
-![alt text](https://github.com/idyakov/inter_project/blob/main/test_structure.png)
 
 Feature: Test Scenarios for Search functionality of soft.reelly page
-
-  Scenario: User login main page functionality
-
-    1. Given Open soft.reelly page
-    2. And Login to the page
-    3. And Click on continue button
-    4. And Click on settings open
-    5. And Click on Edit profile option
-    6. And Enter some test information in the input fields
-    7. And Click on Save changes
-    8. And Check the right information is present in the input fields
-    9. And Click on Close
+  Scenario: User sign on main page functionality
+    Given Open soft.reelly page
+    When Input name field
+    Then Input phone field
+    And Input pwd field
+    And Input comp_web field
+    And Choose role field
+    And Choose country field
+    And Choose comp_size field
+    And Verify expected URL
