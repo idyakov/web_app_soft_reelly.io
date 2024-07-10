@@ -1,6 +1,8 @@
 from selenium.webdriver.common.by import By
 from behave import given, when, then
 from time import sleep
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 @given('Open soft.reelly page')
@@ -57,47 +59,76 @@ def verify_page(context):
 @then('Verify_the_button')
 def verify_the_button(context):
     context.app.login_page.verify_the_button()
-#
-# @given('Login to the page')
-# def input_credentials(context):
-#     context.app.login_page.input_credentials()
-#
-#
-# @given('Click on continue button')
-# def click_search_icon(context):
-#     context.app.login_page.click_sign_in()
-#
-#
-# @given('Click on settings open')
-# def click_on_settings(context):
-#     context.app.login_page.click_on_settings()
-#
-#
-# @given('Click on Edit profile option')
-# def edit_profile(context):
-#     context.app.login_page.edit_profile()
-#
-#
-# @given('Enter some test information in the input fields')
-# def input_fields(context):
-#     context.app.login_page.input_fields()
-#     sleep(3)
-#
-#
-# @given('Check the right information is present in the input fields')
-# def verify_input_fields(context):
-#     context.app.login_page.verify_input_fields()
-#
-#
-# @given('Click on Save changes')
-# def click_on_save(context):
-#     context.app.login_page.click_save_changes()
-#
-#
-# @given('Click on Close')
-# def click_on_close(context):
-#     context.app.login_page.click_on_close()
 
-# def verify_found_results_text(context, search_word):
-#     assert search_word.lower() in context.driver.current_url.lower(), \
-#         f'Expected query not in {context.driver.current_url.lower()}'
+
+@given('Login to the page')
+def input_credentials(context):
+    context.app.login_page.input_credentials()
+
+
+@given('Click on continue button')
+def click_search_icon(context):
+    context.app.login_page.click_sign_in()
+
+
+@given('Click on settings open')
+def click_on_settings(context):
+    context.app.login_page.click_on_settings()
+
+
+@given('Click on Edit profile option')
+def edit_profile(context):
+    context.app.login_page.edit_profile()
+
+
+@given('Enter some test information in the input fields')
+def input_fields(context):
+    context.app.login_page.input_fields()
+    sleep(3)
+
+
+@given('Check the right information is present in the input fields')
+def verify_input_fields(context):
+    context.app.login_page.verify_input_fields()
+
+
+@given('Click on Save changes')
+def click_on_save(context):
+    context.app.login_page.click_save_changes()
+
+
+@given('Click on Close')
+def click_on_close(context):
+    context.app.login_page.click_on_close()
+
+
+@given('Click on “Connect the company”')
+def click_on_page_company(context):
+    context.app.login_page.click_on_page_company()
+
+
+@given('Store original window')
+def store_original_window(context):
+    context.original_window = context.driver.current_window_handle
+    print("Current:", context.original_window)
+    print('All windows: ', context.driver.window_handles)
+
+
+@given('Switch to new window')
+def click_on_page_company(context):
+    context.app.login_page.switch_to_new_window()
+
+
+@given('Verify the right tab opens')
+def verify_new_tab_page(context):
+    expected_url = 'https://soft.reelly.io/book-presentation'
+    actual_url = context.app.login_page.verify_new_tap_page(expected_url)
+    assert actual_url == expected_url, f"Expected URL {expected_url}, but got {actual_url}"
+
+
+@given('Close the current page and switch back')
+def close_and_switch_back(context):
+    # Close the current window
+    context.driver.close()
+    # Switch back to the original window
+    context.driver.switch_to.window(context.original_window)

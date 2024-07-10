@@ -55,3 +55,6 @@ class HelpPage(Page):
     def verify_page(self, expected_url):
         print(expected_url)
         self.wait.until(EC.url_contains(expected_url), message=f'URL verified')
+
+    def close(self):
+        self.driver.close()
